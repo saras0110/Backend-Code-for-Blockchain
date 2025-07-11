@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Election Countdown</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Election Starts In:</h2>
+        <h1 id="timer"></h1>
+        <p id="status"></p>
+        <script>
+            const countdownTime = new Date("2025-07-09T10:00:00").getTime();
+            const x = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countdownTime - now;
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("timer").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("timer").innerHTML = "Voting has started!";
+                    document.getElementById("status").innerHTML = '<a href="https://backend-code-for-blockchain.onrender.com/vote">Click here to vote</a>';
+                }
+            }, 1000);
+        </script>
+    </div>
+</body>
+</html>
